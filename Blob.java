@@ -10,7 +10,7 @@ import java.util.Formatter;
 
 public class Blob {
     public Blob() {
-
+        new File("./objects").mkdirs();
     }
 
     public static void makeBlob(File file) {
@@ -32,7 +32,7 @@ public class Blob {
             fileWriter.write(toWrite);
             fileWriter.close();
         } catch (IOException ex) {
-            System.out.println("some didn't work");
+            System.out.println("slome didn't work");
         }
     }
 

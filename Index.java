@@ -11,7 +11,14 @@ import java.util.Set;
 public class Index {
 
     public Index() {
+        String name = "./objects/index";
 
+        try {
+            FileWriter fileWriter = new FileWriter(name);
+            fileWriter.close();
+        } catch (IOException ex) {
+            System.out.println("some didn't work");
+        }
     }
 
     public static void index(File file) {
@@ -23,7 +30,7 @@ public class Index {
     }
 
     public static Map readIndex(Map map) {
-        try (BufferedReader buffy = new BufferedReader(new FileReader("index"))) {
+        try (BufferedReader buffy = new BufferedReader(new FileReader("./objects/index"))) {
             String line;
             while ((line = buffy.readLine()) != null) {
                 String[] parts = line.split(":");
@@ -65,9 +72,9 @@ public class Index {
         }
     }
 
-    public static void deleteEntry(String filename, String name) {
-        File tempFile = new File(filename + "_temp");
-        File inputFile = new File(filename);
+    public static void deleteEntry(String name) {
+        File tempFile = new File("./objects/index_temp");
+        File inputFile = new File("./objects/index");
 
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFile));
                 BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
@@ -83,6 +90,8 @@ public class Index {
             }
             inputFile.delete();
             tempFile.renameTo(inputFile);
+            File toDelete = new File(name);
+            toDelete.delete();
 
         } catch (IOException e) {
             e.printStackTrace();
