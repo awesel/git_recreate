@@ -90,8 +90,6 @@ public class Index {
             }
             inputFile.delete();
             tempFile.renameTo(inputFile);
-            File toDelete = new File(name);
-            toDelete.delete();
 
         } catch (IOException e) {
             e.printStackTrace();
