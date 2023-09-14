@@ -8,6 +8,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
 
+// ~/Library/Java/JavaVirtualMachines/openjdk-17.0.2
 public class Blob {
     public Blob() {
         new File("./objects").mkdirs();
