@@ -1,0 +1,59 @@
+[
+    {
+        "className": "Index",
+        "constructorConfigs": [
+            {
+                "parameterTypes": ["String"],
+                "values": []
+            }
+        ],
+        "methodConfigs": [
+            {
+                "methodName": "index",
+                "parameters": ["File"],
+                "values": ["file"]
+            },
+            {
+                "methodName": "readIndex",
+                "parameters": ["Map"],
+                "values": ["map"]
+            },
+            {
+                "methodName": "writeToIndex",
+                "parameters": ["Map"],
+                "values": ["idx"]
+            },
+            {
+                "methodName": "writeFile",
+                "parameters": ["String", "String"],
+                "values": ["toWrite", "name"]
+            }
+
+        ]
+    },
+    {
+        "className": "Blob",
+        "constructorConfigs": [
+            {
+                "parameterTypes": [
+                    "String"
+                ],
+                "values": [
+                    "__TEST_FILE_NAME__"
+                ]
+            }
+        ],
+        "methodConfigs": [
+            {
+                "methodName": "makeBlob",
+                "parameters": ["File"],
+                "values": ["test_file"]
+            },
+            {
+                "methodName": "getHashFromFile",
+                "parameters": ["File"],
+                "values": ["test_file"]
+            }
+        ]
+    }
+]
