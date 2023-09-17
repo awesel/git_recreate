@@ -66,6 +66,11 @@ public class GitTest {
     public void testInitialize() throws Exception { // credit to Daniel Hernandez for showing me that I need full
                                                     // pathnames for Junit and not just ./
 
+        File objects = new File("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects");
+        objects.mkdir();
+        PrintWriter indexFile = new PrintWriter(
+                "/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects/index");
+
         Blob bob = new Blob();
         Index ind = new Index();
         PrintWriter pw1 = new PrintWriter("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/text.txt");
@@ -79,6 +84,93 @@ public class GitTest {
 
         Assert.assertEquals(Files.exists(path), true);
         Assert.assertEquals(file.exists(), true);
+
+    }
+
+    @Test
+    public void testCreateBlob() throws Exception {
+
+        // Manually create the files and folders before the 'testAddFile'
+        // MyGitProject myGitClassInstance = new MyGitProject();
+        // myGitClassInstance.init();
+        // TestHelper.runTestSuiteMethods("testCreateBlob", file1.getName());
+
+        Blob b1 = new Blob();
+        Blob b2 = new Blob();
+        Index index = new Index();
+
+        File f1 = new File("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/example.txt");
+        File f2 = new File("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/example2.txt");
+
+        b1.makeBlob(f1);
+        b2.makeBlob(f2);
+
+        File blobHash1 = new File("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects/"
+                + b1.encryptPassword(b1.readFile(f1)));
+
+        File blobHash2 = new File("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects/"
+                + b2.encryptPassword(b1.readFile(f2)));
+
+        assertEquals(blobHash1.exists(), true);
+        assertEquals(blobHash2.exists(), true);
+
+        assertEquals(Blob.readFile(blobHash1), Blob.readFile(f1));
+        assertEquals(Blob.readFile(blobHash2), Blob.readFile(f2));
+
+        assertEquals(blobHash1.getName(), b1.encryptPassword(b1.readFile(f1)));
+        assertEquals(blobHash2.getName(), b2.encryptPassword(b2.readFile(f2)));
+
+        // Check blob exists in the objects folder (DONE)
+
+        // File file_junit1 = new File("objects/" + file1.methodToGetSha1());
+        // assertTrue("Blob file to add not found", file_junit1.exists());
+
+        // // Read file contents
+        // String indexFileContents = MyUtilityClass.readAFileToAString("objects/" +
+        // file1.methodToGetSha1());
+        // assertEquals("File contents of Blob don't match file contents pre-blob
+        // creation", indexFileContents,file1.getContents());
+        // }
+
+    }
+
+    @Test
+    public void testIndex() throws Exception {
+
+        Index i = new Index();
+
+        File f1 = new File("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/example.txt");
+        File f2 = new File("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/example2.txt");
+        i.index(f1);
+
+        File ind = new File("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects/index");
+
+        assertEquals(Blob.readFile(ind).indexOf("a8dd676bdf983b33ec112e95a43b74a47ff41448") != -1, true);
+
+        i.index(f2);
+        assertEquals(Blob.readFile(ind).indexOf("f189623835d5eb6d144e65a21d8b7eabad1da78f") != -1, true);
+
+        i.deleteEntry("example.txt");
+
+        assertEquals(Blob.readFile(ind).indexOf("a8dd676bdf983b33ec112e95a43b74a47ff41448") == -1, true);
+
+        // assertEquals(blobHash1.exists(), true);
+        // assertEquals(blobHash2.exists(), true);
+
+        // assertEquals(Blob.readFile(blobHash1), Blob.readFile(f1));
+        // assertEquals(Blob.readFile(blobHash2), Blob.readFile(f2));
+
+        // Check blob exists in the objects folder (DONE)
+
+        // File file_junit1 = new File("objects/" + file1.methodToGetSha1());
+        // assertTrue("Blob file to add not found", file_junit1.exists());
+
+        // // Read file contents
+        // String indexFileContents = MyUtilityClass.readAFileToAString("objects/" +
+        // file1.methodToGetSha1());
+        // assertEquals("File contents of Blob don't match file contents pre-blob
+        // creation", indexFileContents,file1.getContents());
+        // }
 
     }
 

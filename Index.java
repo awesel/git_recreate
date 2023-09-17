@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -19,8 +20,7 @@ public class Index {
         String name = "/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects/index";
 
         try {
-            FileWriter fileWriter = new FileWriter(name);
-            fileWriter.close();
+            PrintWriter fileWriter = new PrintWriter(name);
         } catch (IOException ex) {
             System.out.println("some didn't work");
         }
@@ -28,7 +28,9 @@ public class Index {
 
     public static void index(File file) {
         Blob.makeBlob(file);
+
         Map<String, String> idx = new HashMap();
+
         idx = readIndex(idx);
         idx.put(file.getName(), Blob.encryptPassword(Blob.readFile(file)));
         writeToIndex(idx);
@@ -64,13 +66,15 @@ public class Index {
             blonkus += idx.get(key);
             blonkus += "\n";
         }
-        writeFile(blonkus, "index");
+
+        writeFile(blonkus, "/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects/index");
+
     }
 
     public static void writeFile(String toWrite, String name) {
-        String path = "/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Gitobjects/" + name;
+        String path = name;
         try {
-            FileWriter fileWriter = new FileWriter(path);
+            PrintWriter fileWriter = new PrintWriter(path);
             fileWriter.write(toWrite);
             fileWriter.close();
         } catch (IOException ex) {
@@ -82,20 +86,33 @@ public class Index {
         File tempFile = new File("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Gitobjects/index_temp");
         File inputFile = new File("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects/index");
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-                BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
+        try
+
+        {
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            // BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
             String currentLine;
 
+            String out = "";
+
             while ((currentLine = reader.readLine()) != null) {
                 if (!currentLine.contains(name)) {
-                    writer.write(currentLine);
-                    writer.newLine();
+                    // writer.write(currentLine);
+                    // writer.newLine();
+
+                    out += currentLine;
                 }
 
             }
-            inputFile.delete();
-            tempFile.renameTo(inputFile);
+            // inputFile.delete();
+            // tempFile.renameTo(inputFile);
+
+            PrintWriter pw = new PrintWriter(
+                    "/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects/index");
+
+            pw.write(out);
+            pw.close();
 
         } catch (IOException e) {
             e.printStackTrace();
