@@ -27,6 +27,11 @@
                 "methodName": "writeFile",
                 "parameters": ["String", "String"],
                 "values": ["toWrite", "name"]
+            },
+            {
+                "methodName": "deleteEntry",
+                "parameters": ["String"],
+                "values": ["name"]
             }
 
         ]
@@ -35,24 +40,40 @@
         "className": "Blob",
         "constructorConfigs": [
             {
-                "parameterTypes": [
-                    "String"
-                ],
-                "values": [
-                    "__TEST_FILE_NAME__"
-                ]
+                "parameterTypes": [],
+                "values": []
             }
         ],
         "methodConfigs": [
             {
                 "methodName": "makeBlob",
                 "parameters": ["File"],
-                "values": ["test_file"]
+                "values": ["file"]
             },
             {
                 "methodName": "getHashFromFile",
                 "parameters": ["File"],
-                "values": ["test_file"]
+                "values": ["file"]
+            },
+            {
+                "methodName": "writeInObjects",
+                "parameters": ["String", "String"],
+                "values": ["toWrite", "name"]
+            },
+            {
+                "methodName": "encryptPassword",
+                "parameters": ["String"],
+                "values": ["password"]
+            },
+            {
+                "methodName": "byteToHex",
+                "parameters": ["byte[]"],
+                "values": ["hash"]
+            },
+            {
+                "methodName": "readFile",
+                "parameters": ["File"],
+                "values": ["file"]
             }
         ]
     }

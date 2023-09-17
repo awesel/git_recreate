@@ -10,7 +10,7 @@ import java.util.Formatter;
 
 public class Blob {
     public Blob() {
-        new File("./objects").mkdirs();
+        new File("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects").mkdirs();
     }
 
     public static void makeBlob(File file) {
@@ -26,7 +26,7 @@ public class Blob {
     }
 
     public static void writeInObjects(String toWrite, String name) {
-        String path = "./objects/" + name;
+        String path = "/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects/" + name;
         try {
             FileWriter fileWriter = new FileWriter(path);
             fileWriter.write(toWrite);
