@@ -6,7 +6,7 @@ public class Tester {
         Index ind = new Index();
         File text = new File("text.txt");
         Blob.makeBlob(text);
-        Index.index(text);
+        Index.index(text, false);
         Index.deleteEntry("text.txt");
     }
 }

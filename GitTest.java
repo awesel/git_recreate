@@ -49,27 +49,30 @@ public class GitTest {
     public static void tearDownAfterClass() throws IOException
 
     {
-        Path indexPath = Paths.get("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects/Index.txt");
+        Path indexPath = Paths.get("/Users/lilbarbar/Desktop/Honors
+        Topics/Andrews_Amazing_Git/objects/Index.txt");
         Files.delete(indexPath);
 
-        Path objectPath = Paths.get("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects");
+        Path objectPath = Paths.get("/Users/lilbarbar/Desktop/Honors
+        Topics/Andrews_Amazing_Git/objects");
         Files.delete(objectPath);
 
         Path junitExamplePath = Paths
-                .get("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/junit_example_file_data.txt");
+        .get("/Users/lilbarbar/Desktop/Honors
+        Topics/Andrews_Amazing_Git/junit_example_file_data.txt");
         Files.delete(junitExamplePath);
 
     }
 
     @Test
-    @DisplayName(value = "[8]")
     public void testInitialize() throws Exception { // credit to Daniel Hernandez for showing me that I need full
                                                     // pathnames for Junit and not just ./
 
-        File objects = new File("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects");
-        objects.mkdir();
-        PrintWriter indexFile = new PrintWriter(
-                "/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects/index");
+        // File objects = new File("/Users/lilbarbar/Desktop/Honors
+        // Topics/Andrews_Amazing_Git/objects");
+        // objects.mkdir();
+        // PrintWriter indexFile = new PrintWriter(
+        // "/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects/index");
 
         Blob bob = new Blob();
         Index ind = new Index();
@@ -141,13 +144,13 @@ public class GitTest {
 
         File f1 = new File("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/example.txt");
         File f2 = new File("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/example2.txt");
-        i.index(f1);
+        i.index(f1, false);
 
         File ind = new File("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects/index");
 
         assertEquals(Blob.readFile(ind).indexOf("a8dd676bdf983b33ec112e95a43b74a47ff41448") != -1, true);
 
-        i.index(f2);
+        i.index(f2, false);
         assertEquals(Blob.readFile(ind).indexOf("f189623835d5eb6d144e65a21d8b7eabad1da78f") != -1, true);
 
         i.deleteEntry("example.txt");

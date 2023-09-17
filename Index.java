@@ -26,14 +26,14 @@ public class Index {
         }
     }
 
-    public static void index(File file) {
+    public static void index(File file, boolean isTree) {
         Blob.makeBlob(file);
 
         Map<String, String> idx = new HashMap();
 
         idx = readIndex(idx);
         idx.put(file.getName(), Blob.encryptPassword(Blob.readFile(file)));
-        writeToIndex(idx);
+        writeToIndex(idx, isTree);
     }
 
     public static Map readIndex(Map map) {
@@ -57,13 +57,24 @@ public class Index {
         }
     }
 
-    public static void writeToIndex(Map idx) { // bvlonk
+    public static void writeToIndex(Map idx, boolean isTree) { // bvlonk
         Set<String> john = idx.keySet();
         String blonkus = "";
         for (String key : john) {
-            blonkus += key;
-            blonkus += " : ";
+
+            if (isTree) {
+                blonkus += "tree : ";
+            } else {
+                blonkus += "blob : ";
+            }
+
             blonkus += idx.get(key);
+
+            if (!isTree) {
+                blonkus += " : ";
+                blonkus += key;
+            }
+
             blonkus += "\n";
         }
 
