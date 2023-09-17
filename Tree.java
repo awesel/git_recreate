@@ -21,12 +21,18 @@ public class Tree {
 
     }
 
-    public void add(String name) throws NoSuchAlgorithmException, IOException {
-        Blob blob = new Blob();
-        blob.makeBlob(new File(name));
+    public void add(String name, boolean isTree) throws NoSuchAlgorithmException, IOException {
+        if (!isTree) {
+            Blob blob = new Blob();
+            blob.makeBlob(new File(name));
 
-        blobs.put(name, blob.getHashFromFile(new File(name)));
-        printBlobs();
+            blobs.put("Blob : " + name, blob.getHashFromFile(new File(name)));
+            printBlobs();
+
+        } else {
+            Tree tree = new Tree(name);
+            blobs.put("Tree : " + name, Blob.getHashFromFile(new File(name)));
+        }
 
     }
 
@@ -44,7 +50,7 @@ public class Tree {
 
     public void printBlobs() {
         try {
-            PrintWriter pw = new PrintWriter("Index.txt");
+            PrintWriter pw = new PrintWriter("Tree: " + treeName + ".txt");
 
             String s = "";
             for (HashMap.Entry<String, String> entry : blobs.entrySet()) {

@@ -49,17 +49,14 @@ public class GitTest {
     public static void tearDownAfterClass() throws IOException
 
     {
-        Path indexPath = Paths.get("/Users/lilbarbar/Desktop/Honors
-        Topics/Andrews_Amazing_Git/objects/Index.txt");
+        Path indexPath = Paths.get("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects/Index.txt");
         Files.delete(indexPath);
 
-        Path objectPath = Paths.get("/Users/lilbarbar/Desktop/Honors
-        Topics/Andrews_Amazing_Git/objects");
+        Path objectPath = Paths.get("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/objects");
         Files.delete(objectPath);
 
         Path junitExamplePath = Paths
-        .get("/Users/lilbarbar/Desktop/Honors
-        Topics/Andrews_Amazing_Git/junit_example_file_data.txt");
+                .get("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/junit_example_file_data.txt");
         Files.delete(junitExamplePath);
 
     }
