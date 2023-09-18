@@ -174,4 +174,16 @@ public class GitTest {
 
     }
 
+    @Test
+    public void testTree() throws Exception {
+
+        Index i = new Index();
+
+        Tree tree1 = new Tree("Tree1");
+        tree1.add("example3.txt", false);
+        i.index(new File("Tree1"), true);
+        assertEquals(new File("/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/Tree1/stuff.txt").exists(),
+                true);
+    }
+
 }

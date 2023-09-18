@@ -50,7 +50,8 @@ public class Tree {
 
     public void printBlobs() {
         try {
-            PrintWriter pw = new PrintWriter("Tree: " + treeName + ".txt");
+            PrintWriter pw = new PrintWriter(
+                    "/Users/lilbarbar/Desktop/Honors Topics/Andrews_Amazing_Git/" + treeName + "/stuff.txt");
 
             String s = "";
             for (HashMap.Entry<String, String> entry : blobs.entrySet()) {
