@@ -29,7 +29,7 @@ public class Index {
         writeToIndex(idx);
     }
 
-    public static Map readIndex(Map map) {
+    private static Map readIndex(Map map) {
         try (BufferedReader buffy = new BufferedReader(new FileReader("./objects/index"))) {
             String line;
             while ((line = buffy.readLine()) != null) {
@@ -49,7 +49,7 @@ public class Index {
         }
     }
 
-    public static void writeToIndex(Map idx) { // bvlonk
+    private static void writeToIndex(Map idx) { // bvlonk
         Set<String> john = idx.keySet();
         String blonkus = "";
         for (String key : john) {
@@ -61,7 +61,7 @@ public class Index {
         writeFile(blonkus, "index");
     }
 
-    public static void writeFile(String toWrite, String name) {
+    private static void writeFile(String toWrite, String name) {
         String path = "./objects/" + name;
         try {
             FileWriter fileWriter = new FileWriter(path);

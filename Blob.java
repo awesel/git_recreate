@@ -26,7 +26,7 @@ public class Blob {
         return fileName;
     }
 
-    public static void writeInObjects(String toWrite, String name) {
+    private static void writeInObjects(String toWrite, String name) {
         String path = "./objects/" + name;
         try {
             FileWriter fileWriter = new FileWriter(path);
