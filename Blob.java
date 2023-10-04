@@ -52,8 +52,8 @@ public class Blob {
         }
         return sha1;
     }
-    // TAKEN FROM STACK
 
+    // TAKEN FROM STACK
     private static String byteToHex(final byte[] hash) {
         Formatter formatter = new Formatter();
         for (byte b : hash) {

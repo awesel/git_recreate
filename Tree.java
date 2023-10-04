@@ -4,10 +4,15 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Formatter;
+import java.util.stream.Stream;
 
 public class Tree {
     private String nameOfTree;
     private ArrayList<String> entries; // this has all the stuff
+
+    public Tree() {
+        entries = new ArrayList<>();
+    }
 
     public Tree(String hash) throws IOException {
         nameOfTree = hash;
@@ -23,6 +28,10 @@ public class Tree {
             FileWriter fileWriter = new FileWriter("./objects/" + nameOfTree);
             fileWriter.close();
         }
+    }
+
+    public String getSha1() {
+        return nameOfTree;
     }
 
     public void add(String entry) throws IOException {
@@ -56,6 +65,55 @@ public class Tree {
         try (FileWriter writer = new FileWriter("./objects/" + nameOfTree)) {
             writer.write(builder.toString());
         }
+    }
+
+    public String addDirectory(String directoryPath) throws IOException {
+        String sha = "";
+        String john = doFoldas(directoryPath);
+
+        try (FileWriter writer = new FileWriter("./objects/" + nameOfTree)) {
+            writer.write(john);
+        }
+
+        return sha;
+    }
+
+    public String doFoldas(String directoryPath) {
+        ArrayList<String> folders = new ArrayList<>();
+        findFolders(new File(directoryPath), folders);
+
+        StringBuilder result = new StringBuilder();
+        for (String folder : folders) {
+            String encryptedName = encryptPassword(folder);
+            result.append("blob: ").append(encryptedName).append(" : ").append(folder).append("\n");
+        }
+
+        return result.toString();
+    }
+
+    // I did this with recusion
+    private void findFolders(File directory, ArrayList<String> folders) {
+        File[] files = directory.listFiles();
+        if (files == null) {
+            return;
+        }
+
+        for (File file : files) {
+            if (file.isDirectory()) {
+                folders.add(file.getAbsolutePath());
+                findFolders(file, folders);
+            }
+        }
+    }
+
+    private ArrayList<String> findFolders(File directory) {
+        ArrayList<String> folders = new ArrayList<>();
+        for (File file : directory.listFiles()) {
+            if (file.isDirectory()) {
+                folders.add(file.toString());
+            }
+        }
+        return folders;
     }
 
     // TAKEN FROM STACK
